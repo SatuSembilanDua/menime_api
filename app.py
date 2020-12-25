@@ -55,6 +55,19 @@ def get_vid(URL):
     # e = html.escape(a)
     return iframe['src']
 
+def anifo2(URL):
+    URL = d_url(URL)
+    #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
+    scraper = cfscrape.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+    return soup.prettify(formatter="html5")
+
+def get_vid2(URL):
+    URL = d_url(URL)
+    scraper = cfscrape.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+    return soup.prettify(formatter="html5")
+
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>Menime</h1><p>This site is a prototype API for menime. !</p>"
@@ -70,12 +83,12 @@ def list_anime(link_url):
 @app.route('/anin/', methods=['GET'])
 def anin():
     lr = "aHR0cHM6Ly93d3cub3Bsb3ZlcnouaW4vc2VyaWVzL29uZS1waWVjZS1zdWItaW5kby8"
-    return anifo(lr)
+    return anifo2(lr)
 
 @app.route('/la/', methods=['GET'])
 def la():
     lr = "aHR0cHM6Ly93d3cub3Bsb3ZlcnouaW4vb25lLXBpZWNlLWVwaXNvZGUtOTU0LXN1YnRpdGxlLWluZG9uZXNpYS8"
-    return list_anime(lr)
+    return get_vid2(lr)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
