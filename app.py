@@ -68,6 +68,12 @@ def get_vid2(URL):
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
+def menimea():
+    URL = "http://menime.herokuapp.com/"
+    scraper = cfscrape.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+    return soup.prettify(formatter="html5")
+
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>Menime</h1><p>This site is a prototype API for menime. !</p>"
@@ -89,6 +95,10 @@ def anin():
 def la():
     lr = "aHR0cHM6Ly93d3cub3Bsb3ZlcnouaW4vb25lLXBpZWNlLWVwaXNvZGUtOTU0LXN1YnRpdGxlLWluZG9uZXNpYS8"
     return get_vid2(lr)
+
+@app.route('/menime/', methods=['GET'])
+def menime():
+    return menimea()
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
