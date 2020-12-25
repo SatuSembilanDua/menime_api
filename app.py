@@ -67,6 +67,16 @@ def anime_info(link_url):
 def list_anime(link_url):
     return get_vid(link_url)
 
+@app.route('/anin/', methods=['GET'])
+def anin():
+    lr = "aHR0cHM6Ly93d3cub3Bsb3ZlcnouaW4vc2VyaWVzL29uZS1waWVjZS1zdWItaW5kby8"
+    return anifo(lr)
+
+@app.route('/la/', methods=['GET'])
+def la():
+    lr = "aHR0cHM6Ly93d3cub3Bsb3ZlcnouaW4vb25lLXBpZWNlLWVwaXNvZGUtOTU0LXN1YnRpdGxlLWluZG9uZXNpYS8"
+    return list_anime(lr)
+
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=5000)
