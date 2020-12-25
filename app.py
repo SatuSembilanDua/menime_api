@@ -57,7 +57,7 @@ def get_vid(URL):
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Menime</h1><p>This site is a prototype API for menime.</p>"
+    return "<h1>Menime</h1><p>This site is a prototype API for menime. !</p>"
 
 @app.route('/anime_info/<link_url>', methods=['GET'])
 def anime_info(link_url):
