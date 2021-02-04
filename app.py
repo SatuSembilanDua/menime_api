@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import cfscrape
 import html
 import base64
+import cloudscraper
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -27,7 +28,8 @@ def d_url(s):
 def anifo(URL):
     URL = d_url(URL)
     #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
-    scraper = cfscrape.create_scraper()
+    # scraper = cfscrape.create_scraper()
+    scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
 
     desc = soup.find('span', class_='desc')
@@ -47,7 +49,8 @@ def anifo(URL):
 
 def get_vid(URL):
     URL = d_url(URL)
-    scraper = cfscrape.create_scraper()
+    # scraper = cfscrape.create_scraper()
+    scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     
     iframe = soup.find('iframe', class_='idframe')
@@ -58,19 +61,22 @@ def get_vid(URL):
 def anifo2(URL):
     URL = d_url(URL)
     #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
-    scraper = cfscrape.create_scraper()
+    # scraper = cfscrape.create_scraper()
+    scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
 def get_vid2(URL):
     URL = d_url(URL)
-    scraper = cfscrape.create_scraper()
+    # scraper = cfscrape.create_scraper()
+    scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
 def menimea():
     URL = "http://menime.herokuapp.com/"
-    scraper = cfscrape.create_scraper()
+    # scraper = cfscrape.create_scraper()
+    scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
