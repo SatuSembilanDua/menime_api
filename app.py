@@ -39,8 +39,8 @@ def anifo(URL):
 
     a = desc.prettify(formatter="html5")
     b = listinfo.prettify(formatter="html5")
-    c = a.replace('"', "'")
-    d = b.replace('"', "'")
+    c = a.replace('"', "\"")
+    d = b.replace('"', "\"")
     e = html.escape(c)
     f = html.escape(d)
     ret = {'desc':e,'info':f,'img':img[0]["src"]}
