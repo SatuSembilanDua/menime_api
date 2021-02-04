@@ -1,5 +1,5 @@
 import flask
-from flask import request, jsonify, json
+from flask import request, jsonify, json, render_template
 from bs4 import BeautifulSoup
 import cfscrape
 import html
@@ -76,7 +76,8 @@ def menimea():
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Menime</h1><p>This site is a prototype API for menime. !</p>"
+    return render_template("index.html")
+    #return "<h1>Menime</h1><p>This site is a prototype API for menime. !</p>"
 
 @app.route('/anime_info/<link_url>', methods=['GET'])
 def anime_info(link_url):
