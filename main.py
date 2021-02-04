@@ -4,9 +4,7 @@ from bs4 import BeautifulSoup
 import cfscrape
 import html
 import base64
-
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+import cloudscraper
 
 def e_url(s):
     ssb = s.encode("ascii") 
@@ -55,21 +53,21 @@ def get_vid(URL):
     # e = html.escape(a)
     return iframe['src']
 
-@app.route('/', methods=['GET'])
-def home():
-    return "<h1>Menime</h1><p>This site is a prototype API for menime.</p>"
+# @app.route('/', methods=['GET'])
+# def home():
+#     return "<h1>Menime</h1><p>This site is a prototype API for menime.</p>"
 
-@app.route('/anime_info/<link_url>', methods=['GET'])
-def anime_info(link_url):
-    return anifo(link_url)
+# @app.route('/anime_info/<link_url>', methods=['GET'])
+# def anime_info(link_url):
+#     return anifo(link_url)
 
-@app.route('/list_anime/<link_url>', methods=['GET'])
-def list_anime(link_url):
-    return get_vid(link_url)
+# @app.route('/list_anime/<link_url>', methods=['GET'])
+# def list_anime(link_url):
+#     return get_vid(link_url)
 
-if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+# if __name__ == '__main__':
+#     # Threaded option to enable multiple instances for multiple user access support
+#     app.run(threaded=True, port=5000)
 
 #
 
@@ -85,3 +83,6 @@ print(listinfo.prettify())
 
 
 """
+scraper = cloudscraper.create_scraper()  # returns a CloudScraper instance
+# Or: scraper = cloudscraper.CloudScraper()  # CloudScraper inherits from requests.Session
+print(scraper.get("https://www.oploverz.in/").text)  # => "<!DOCTYPE html><html><head>..."
