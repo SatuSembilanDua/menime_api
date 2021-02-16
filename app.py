@@ -58,6 +58,28 @@ def get_vid(URL):
     # e = html.escape(a)
     return iframe['src']
 
+def get_eps_list(URL):
+    URL = d_url(URL)
+    scraper = cloudscraper.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+
+    episodelist = soup.find(class_='episodelist')
+    ret = []
+    for li in episodelist.find_all("li"):
+        eps = li.find(class_="leftoff")
+        judul = li.find(class_="lefttitle")
+        dt = li.find(class_="rightoff")
+        alink = eps.find("a")
+        con = {
+                'link':alink.get('href'),
+                'eps':eps.get_text().strip(),
+                'judul':judul.get_text().strip(),
+                'date':dt.get_text().strip()
+                }
+        ret.append(con)
+
+    return json.dumps(ret)
+
 def anifo2(URL):
     URL = d_url(URL)
     #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
@@ -92,6 +114,10 @@ def anime_info(link_url):
 @app.route('/list_anime/<link_url>', methods=['GET'])
 def list_anime(link_url):
     return get_vid(link_url)
+
+@app.route('/eps_anime/<link_url>', methods=['GET'])
+def eps_anime(link_url):
+    return get_eps_list(link_url)
 
 @app.route('/anin/', methods=['GET'])
 def anin():
