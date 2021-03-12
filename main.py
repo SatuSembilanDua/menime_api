@@ -99,7 +99,10 @@ def menimea():
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
-URL = "https://oploverz.bz/anime/one-piece/" #_url(URL)
+# URL = "https://oploverz.bz/anime/one-piece/" 
+URL = "https://oploverz.bz/anime/captain-tsubasa-2018/" 
+
+#_url(URL)
 #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
 # scraper = cfscrape.create_scraper()
 scraper = cloudscraper.create_scraper()
@@ -110,8 +113,18 @@ desc = soup.find("div", class_="entry-content")
 listinfo = soup.find('div', class_='ninfo')
 img = soup.find('img', class_='wp-post-image')
 # print(desc)
+# print("<br>")
 # print(listinfo)
-print(img['src'])
+# print("<br>")
+# print(img['src'])
+
+b = listinfo.prettify(formatter="html5") if listinfo else ""
+d = b.replace('"', "\"")
+f = html.escape(d)
+
+print(f)
+
+
 
 # listinfo = soup.find('div', class_='listinfo')
 # img_des = soup.find('div', class_='imgdesc')

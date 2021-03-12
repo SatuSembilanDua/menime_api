@@ -42,7 +42,7 @@ def anifo(URL):
     img = soup.find('img', class_='wp-post-image')
 
     a = desc.prettify(formatter="html5")
-    b = listinfo.prettify(formatter="html5")
+    b = listinfo.prettify(formatter="html5") if listinfo else ""
     c = a.replace('"', "\"")
     d = b.replace('"', "\"")
     e = html.escape(c)
