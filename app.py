@@ -32,10 +32,14 @@ def anifo(URL):
     scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
 
-    desc = soup.find('span', class_='desc')
-    listinfo = soup.find('div', class_='listinfo')
-    img_des = soup.find('div', class_='imgdesc')
-    img = img_des.findChildren("img" , recursive=False)
+    # desc = soup.find('span', class_='desc')
+    # listinfo = soup.find('div', class_='listinfo')
+    # img_des = soup.find('div', class_='imgdesc')
+    # img = img_des.findChildren("img" , recursive=False)
+
+    desc = soup.find("div", class_="entry-content")
+    listinfo = soup.find('div', class_='ninfo')
+    img = soup.find('img', class_='wp-post-image')
 
     a = desc.prettify(formatter="html5")
     b = listinfo.prettify(formatter="html5")
@@ -43,7 +47,7 @@ def anifo(URL):
     d = b.replace('"', "\"")
     e = html.escape(c)
     f = html.escape(d)
-    ret = {'desc':e,'info':f,'img':img[0]["src"]}
+    ret = {'desc':e,'info':f,'img':img["src"]}
     jsona = json.dumps(ret)
     return jsona
 
@@ -63,13 +67,13 @@ def get_eps_list(URL):
     scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
 
-    episodelist = soup.find(class_='episodelist')
+    episodelist = soup.find(class_='eplister')
     ret = []
     for li in episodelist.find_all("li"):
-        eps = li.find(class_="leftoff")
-        judul = li.find(class_="lefttitle")
-        dt = li.find(class_="rightoff")
-        alink = eps.find("a")
+        eps = li.find(class_="epl-num")
+        judul = li.find(class_="epl-title")
+        dt = li.find(class_="epl-date")
+        alink = li.find("a")
         con = {
                 'link':alink.get('href'),
                 'eps':eps.get_text().strip(),
