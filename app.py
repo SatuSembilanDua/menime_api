@@ -146,7 +146,7 @@ def menime():
     return menimea()
 
 @app.route('/dragon_ball/<link_url>', methods=['GET'])
-def eps_anime(link_url):
+def getdragonball(link_url):
     return get_dragon_ball(link_url)
 
 if __name__ == '__main__':
