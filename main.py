@@ -100,7 +100,8 @@ def menimea():
     return soup.prettify(formatter="html5")
 
 # URL = "https://oploverz.bz/anime/one-piece/" 
-URL = "https://oploverz.bz/anime/captain-tsubasa-2018/" 
+# URL = "https://oploverz.bz/anime/captain-tsubasa-2018/" 
+URL = "https://www.animeindo.cc/dragon-ball-episode-001-subtitle-indonesia/" 
 
 #_url(URL)
 #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
@@ -108,21 +109,15 @@ URL = "https://oploverz.bz/anime/captain-tsubasa-2018/"
 scraper = cloudscraper.create_scraper()
 soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
 
+"""
+foreach ($html->find(".playeriframe") as $iframe) {
+        return $iframe->src;
+    }
 
-desc = soup.find("div", class_="entry-content")
-listinfo = soup.find('div', class_='ninfo')
-img = soup.find('img', class_='wp-post-image')
-# print(desc)
-# print("<br>")
-# print(listinfo)
-# print("<br>")
-# print(img['src'])
-
-b = listinfo.prettify(formatter="html5") if listinfo else ""
-d = b.replace('"', "\"")
-f = html.escape(d)
-
-print(f)
+"""
+playeriframe = soup.find('iframe', class_='playeriframe')
+src = playeriframe["src"]
+print(src)
 
 
 

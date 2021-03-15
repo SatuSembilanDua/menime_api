@@ -106,6 +106,14 @@ def menimea():
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     return soup.prettify(formatter="html5")
 
+def get_dragon_ball(URL):
+    URL = d_url(URL)
+    scraper = cloudscraper.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+    playeriframe = soup.find('iframe', class_='playeriframe')
+    src = playeriframe["src"]
+    return src
+
 @app.route('/', methods=['GET'])
 def home():
     return render_template("index.html")
@@ -136,6 +144,10 @@ def la():
 @app.route('/menime/', methods=['GET'])
 def menime():
     return menimea()
+
+@app.route('/dragon_ball/<link_url>', methods=['GET'])
+def eps_anime(link_url):
+    return get_dragon_ball(link_url)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
