@@ -101,13 +101,13 @@ def menimea():
 
 # URL = "https://oploverz.bz/anime/one-piece/" 
 # URL = "https://oploverz.bz/anime/captain-tsubasa-2018/" 
-URL = "https://www.animeindo.cc/dragon-ball-episode-001-subtitle-indonesia/" 
+# URL = "https://www.animeindo.cc/dragon-ball-episode-001-subtitle-indonesia/" 
 
 #_url(URL)
 #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
 # scraper = cfscrape.create_scraper()
-scraper = cloudscraper.create_scraper()
-soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+# scraper = cloudscraper.create_scraper()
+# soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
 
 """
 foreach ($html->find(".playeriframe") as $iframe) {
@@ -115,9 +115,15 @@ foreach ($html->find(".playeriframe") as $iframe) {
     }
 
 """
-playeriframe = soup.find('iframe', class_='playeriframe')
-src = playeriframe["src"]
-print(src)
+al = ["https://www84.zippyshare.com/v/tLbmh3b4/file.html", "https://www111.zippyshare.com/v/tWgdDLU2/file.html", "https://www32.zippyshare.com/v/EJ5tE51o/file.html", "https://www32.zippyshare.com/v/fB7sIk07/file.html", "https://www32.zippyshare.com/v/MsfPEuqf/file.html", "https://www32.zippyshare.com/v/tDeS2mRO/file.html", "https://www32.zippyshare.com/v/BVBUekHS/file.html", "https://www32.zippyshare.com/v/phMOgbCi/file.html", "https://www32.zippyshare.com/v/4KpnM7tt/file.html", "https://www60.zippyshare.com/v/oYwjuclJ/file.html", "https://www60.zippyshare.com/v/gjxwlsUN/file.html", "https://www60.zippyshare.com/v/TFoX8yHW/file.html", "https://www60.zippyshare.com/v/diKWG5p0/file.html", "https://www60.zippyshare.com/v/pKOo52IT/file.html", "https://www60.zippyshare.com/v/v4Pmthu6/file.html", "https://www60.zippyshare.com/v/aYj0LDGt/file.html", "https://www60.zippyshare.com/v/EwoZQiUp/file.html", "https://www60.zippyshare.com/v/DQB6e3WO/file.html", "https://www60.zippyshare.com/v/B18ghaO5/file.html"];
+scraper = cloudscraper.create_scraper()
+for lk in al:
+    print(lk)
+    soup = BeautifulSoup(scraper.get(lk).content, 'html.parser')
+    link = soup.find("a",  {"id": "dlbutton"})
+    print(link)
+    print(link.get('href'))
+    break
 
 
 

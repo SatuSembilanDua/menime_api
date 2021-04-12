@@ -29,9 +29,15 @@ def anifo(URL):
     URL = d_url(URL)
     #URL = 'https://www.oploverz.in/series/one-piece-sub-indo/'
     # scraper = cfscrape.create_scraper()
-    scraper = cloudscraper.create_scraper()
+    # scraper = cloudscraper.create_scraper()
+    scraper = cloudscraper.create_scraper(
+        browser={
+            'browser': 'chrome',
+            'platform': 'android',
+            'desktop': False
+        }
+    )
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
-
     # desc = soup.find('span', class_='desc')
     # listinfo = soup.find('div', class_='listinfo')
     # img_des = soup.find('div', class_='imgdesc')
@@ -69,6 +75,7 @@ def get_eps_list(URL):
 
     episodelist = soup.find(class_='eplister')
     ret = []
+    jml = 0
     for li in episodelist.find_all("li"):
         eps = li.find(class_="epl-num")
         judul = li.find(class_="epl-title")
@@ -81,6 +88,35 @@ def get_eps_list(URL):
                 'date':dt.get_text().strip()
                 }
         ret.append(con)
+        if jml>=5:
+            break
+        jml+=1
+
+    return json.dumps(ret)
+
+def get_eps_update(URL):
+    URL = d_url(URL)
+    scraper = cloudscraper.create_scraper()
+    soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
+
+    episodelist = soup.find(class_='eplister')
+    ret = []
+    jml = 0
+    for li in episodelist.find_all("li"):
+        eps = li.find(class_="epl-num")
+        judul = li.find(class_="epl-title")
+        dt = li.find(class_="epl-date")
+        alink = li.find("a")
+        con = {
+                'link':alink.get('href'),
+                'eps':eps.get_text().strip(),
+                'judul':judul.get_text().strip(),
+                'date':dt.get_text().strip()
+                }
+        ret.append(con)
+        if jml>=5:
+            break
+        jml+=1
 
     return json.dumps(ret)
 
@@ -130,6 +166,10 @@ def list_anime(link_url):
 @app.route('/eps_anime/<link_url>', methods=['GET'])
 def eps_anime(link_url):
     return get_eps_list(link_url)
+
+@app.route('/eps_updt/<link_url>', methods=['GET'])
+def eps_updt(link_url):
+    return get_eps_update(link_url)
 
 @app.route('/anin/', methods=['GET'])
 def anin():
