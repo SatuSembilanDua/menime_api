@@ -63,10 +63,16 @@ def get_vid(URL):
     scraper = cloudscraper.create_scraper()
     soup = BeautifulSoup(scraper.get(URL).content, 'html.parser')
     
-    iframe = soup.find('iframe', class_='idframe')
+    if soup.find('iframe', class_='idframe'):
+        iframe = soup.find('iframe', class_='idframe')
+        return iframe["src"]
+    else:
+        fframe = soup.find('iframe')
+        return fframe['src']
+    # print(iframe)
     #a = iframe.prettify(formatter="html5")
     # e = html.escape(a)
-    return iframe['src']
+    # return iframe['src']
 
 def get_eps_list(URL):
     URL = d_url(URL)
