@@ -68,8 +68,8 @@ def get_vid(URL):
         return iframe["src"]
     else:
         fframe = soup.find('iframe')
-        return soup.prettify(formatter="html5")
-        # return fframe['src']
+        # return soup.prettify(formatter="html5")
+        return fframe["src"]
     # print(iframe)
     #a = iframe.prettify(formatter="html5")
     # e = html.escape(a)
